@@ -6,7 +6,14 @@
     <title>Customer Details</title>
 </head>
 <body>
-    <h1>Invoice for {{customer_name}}</h1>
-    <p>Total Amount: {{invoice_total}}</p>
+    {% for invoice in all_invoices %}
+    <p>Invoice {{invoice.number}} - Customer: {{invoice.customer}}, Amount: {{invoice.amount}}</p>
+    {% endfor %}
+
+    {% if invoice.amount > 700000 %}
+    <p>High Value Customer</p>
+    {% else %}
+    <p>Regular Customer</p>
+    {% endif %}
 </body>
 </html>

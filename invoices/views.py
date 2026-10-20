@@ -6,8 +6,11 @@ from django.shortcuts import render
 
 def show_invoice(request):
     data= {
-        'customer_name': "Sona",
-        'invoice_total': 150000
+    'all_invoices': [
+        {'number':1,'customer':'Rahul','amount':1003000},
+        {'number':2,'customer':'Ramesh','amount':453000},
+        {'number':3,'customer':'Suresh','amount':302400},
+    ]
     }
     return render(request,'cust_name.html',data)
    
