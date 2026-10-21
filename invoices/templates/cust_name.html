@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Details</title>
-</head>
-<body>
+{% extends "/Users/pavitras/Desktop/Web Dev/django/env_billing/invoices/templates/base.html" %}
+{% block content %}
     {% for invoice in all_invoices %}
     <p>Invoice {{invoice.number}} - Customer: {{invoice.customer}}, Amount: {{invoice.amount}}</p>
     {% endfor %}
@@ -15,5 +9,5 @@
     {% else %}
     <p>Regular Customer</p>
     {% endif %}
-</body>
-</html>
+
+{% endblock %}
