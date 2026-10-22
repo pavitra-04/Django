@@ -1,0 +1,118 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Dashboard | BillEase{% endblock %}
+
+{% block content %}
+
+<section class="welcome">
+    <h1>Billing Dashboard</h1>
+    <p>Manage your invoices, track payments, and view your customers.</p>
+</section>
+
+<section class="stats">
+    <div class="stat-card">
+        <p>Total Invoices</p>
+        <h2>{{ total_invoices }}</h2>
+    </div>
+
+    <div class="stat-card">
+        <p>Paid Invoices</p>
+        <h2>{{ paid_invoices }}</h2>
+    </div>
+
+    <div class="stat-card">
+        <p>Unpaid Invoices</p>
+        <h2>{{ unpaid_invoices }}</h2>
+    </div>
+
+    <div class="stat-card">
+        <p>Total Billed</p>
+        <h2>₹{{ total_amount|default:0|floatformat:2 }}</h2>
+    </div>
+</section>
+
+<section class="table-section">
+    <div class="section-heading">
+        <div>
+            <h2>Recent Invoices</h2>
+            <p>Your latest billing activity.</p>
+        </div>
+        <a class="view-link" href="{% url 'invoice_list' %}">View all →</a>
+    </div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Invoice No.</th>
+                    <th>Customer</th>
+                    <th>Amount</th>
+                    <th>Date Created</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for invoice in recent_invoices %}
+                <tr>
+                    <td>
+                        <a href="{% url 'invoice_detail' invoice.pk %}">
+                            {{ invoice.invoice_number }}
+                        </a>
+                    </td>
+                    <td>{{ invoice.customer_name }}</td>
+                    <td>₹{{ invoice.amount|floatformat:2 }}</td>
+                    <td>{{ invoice.date_created|date:"d M Y" }}</td>
+                    <td>
+                        {% if invoice.is_paid %}
+                            <span class="badge paid">Paid</span>
+                        {% else %}
+                            <span class="badge unpaid">Unpaid</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="empty-row">No invoices found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="table-section">
+    <div class="section-heading">
+        <div>
+            <h2>Customers</h2>
+            <p>Customers associated with your invoices.</p>
+        </div>
+    </div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Total Invoices</th>
+                    <th>Total Billed</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for customer in customers %}
+                <tr>
+                    <td>{{ customer.customer_name }}</td>
+                    <td>{{ customer.invoice_count }}</td>
+                    <td>₹{{ customer.total_billed|default:0|floatformat:2 }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3" class="empty-row">No customers found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+{% endblock %}

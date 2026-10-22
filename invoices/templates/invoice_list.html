@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice List</title>
+</head>
+<body>
+
+    <h1>All Invoices</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Invoice Number</th>
+                <th>Customer</th>
+                <th>Amount</th>
+                <th>Date Created</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for invoice in all_invoices %}
+            <tr>
+                <td>
+                    <a href="/invoices/{{ invoice.pk }}/">
+                        {{ invoice.invoice_number }}
+                    </a>
+                </td>
+                <td>{{ invoice.customer_name }}</td>
+                <td>₹{{ invoice.amount }}</td>
+                <td>{{ invoice.date_created }}</td>
+                <td>
+                    {% if invoice.is_paid %}
+                        Paid
+                    {% else %}
+                        Unpaid
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No invoices found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h1>Unpaid Invoices</h1>
+
+    {% for invoice in unpaid_invoices %}
+        <p>
+            Invoice {{ invoice.invoice_number }} -
+            Customer: {{ invoice.customer_name }},
+            Amount: ₹{{ invoice.amount }}
+        </p>
+    {% empty %}
+        <p>No unpaid invoices found.</p>
+    {% endfor %}
+
+</body>
+</html>

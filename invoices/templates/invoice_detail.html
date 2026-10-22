@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Details</title>
+</head>
+<body>
+
+    <h1>Invoice Details</h1>
+
+    <p><strong>Invoice Number:</strong> {{ invoice.invoice_number }}</p>
+    <p><strong>Customer:</strong> {{ invoice.customer_name }}</p>
+    <p><strong>Amount:</strong> ₹{{ invoice.amount }}</p>
+    <p><strong>Date Created:</strong> {{ invoice.date_created }}</p>
+    <p><strong>Payment Status:</strong>
+        {% if invoice.is_paid %}
+            Paid
+        {% else %}
+            Unpaid
+        {% endif %}
+    </p>
+    <p><strong>Notes:</strong> {{ invoice.notes }}</p>
+
+    <a href="/invoices/">Back to Invoice List</a>
+
+</body>
+</html>
