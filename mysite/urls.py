@@ -16,15 +16,17 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import include, path
 from invoices import views
+from django.contrib.auth import views as auth_views
+from accounts import views as account_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('invoices.urls')),
-    path('', views.home, name='home'),
-    path('invoices/', views.invoice_list, name='invoice_list'),
-    path('invoices/<int:pk>/', views.show_one_invoice, name='invoice_detail'),
-    path('create-invoice/', views.create_invoice, name='create_invoice'),
     path('invoices/add/', views.add_invoice, name='add_invoice'),
+    path('login/', auth_views.LoginView.as_view(template_name='accounts/login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('', include('accounts.urls')),
+    path('signup/', account_views.signup, name='signup'),
 ]

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Your account | BillEase{% endblock %}
+
+{% block content %}
+<section class="welcome">
+  <h1>Your account</h1>
+  <p>You are signed in as {{ user.username }}.</p>
+</section>
+<section class="table-section">
+  <h2>Account details</h2>
+  <p><strong>Username:</strong> {{ user.username }}</p>
+  <p><strong>Email:</strong> {{ user.email|default:"Not provided" }}</p>
+</section>
+{% endblock %}

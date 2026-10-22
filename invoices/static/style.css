@@ -39,6 +39,54 @@ body {
     color: #93c5fd;
 }
 
+.navbar nav {
+    align-items: center;
+}
+
+.nav-button,
+.auth-form button {
+    border: 0;
+    border-radius: 6px;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+    font: inherit;
+    padding: 9px 16px;
+}
+
+.auth-form {
+    max-width: 520px;
+    margin: 50px auto;
+}
+
+.auth-form h1 {
+    margin-bottom: 8px;
+}
+
+.auth-form form {
+    margin: 24px 0;
+}
+
+.auth-form form p {
+    margin: 14px 0;
+}
+
+.auth-form input {
+    display: block;
+    max-width: 100%;
+    padding: 8px;
+}
+
+.auth-form ul,
+.auth-form .helptext {
+    color: #718096;
+    font-size: 13px;
+}
+
+.auth-form a {
+    color: #2563eb;
+}
+
 .container {
     max-width: 1200px;
     width: 90%;

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
 from .models import Invoice
 from django.views.generic import ListView, DetailView,TemplateView
@@ -37,12 +37,12 @@ def create_invoice(request):
 
 
 #fetch
-def show_one_invoice(request):
-    invoice = Invoice.objects.get(id=5)
+def show_one_invoice(request, pk):
+    invoice = get_object_or_404(Invoice, pk=pk)
     data = {
         'invoice': invoice
     }
-    return render(request, 'invoice_detail.html', {})
+    return render(request, 'invoice_detail.html', data)
 
 #filter
 def show_unpaid_invoices(request):

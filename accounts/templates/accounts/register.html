@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Create account | BillEase{% endblock %}
+
+{% block content %}
+<section class="table-section auth-form">
+  <h1>Create your account</h1>
+  <p>Register to get started with BillEase.</p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create account</button>
+  </form>
+  <p>Already have an account? <a href="{% url 'login' %}">Log in</a>.</p>
+</section>
+{% endblock %}
