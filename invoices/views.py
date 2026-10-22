@@ -4,9 +4,24 @@ from .models import Invoice
 from django.views.generic import ListView, DetailView,TemplateView
 from django.shortcuts import render
 from django.db.models import Count, Sum
+from django.shortcuts import redirect
+from .forms import InvoiceForm
+
+def add_invoice(request):
+    if request.method == 'POST':
+        form = InvoiceForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('invoice_list')
+    else:
+        form = InvoiceForm()
+    data={
+        'form': form
+    }
+    return render(request, 'add_invoice.html', data)
 
 #create a new record
-from django.shortcuts import redirect
+
 
 def create_invoice(request):
     Invoice.objects.create(
